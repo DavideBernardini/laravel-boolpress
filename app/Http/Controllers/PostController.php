@@ -20,7 +20,7 @@ class PostController extends Controller
         $post = Post::where('slug', $slug)->first();
 
         if(!$post) {
-            abort("404");
+            abort("404"); 
         }
 
         return view("guest.posts.show", compact("post"));

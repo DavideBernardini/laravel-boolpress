@@ -12,6 +12,8 @@
 
         <p>{{$post['content']}}</p>
 
+        <a href="{{ route('posts.index') }}" class="btn btn-sm btn-outline-secondary mt-3">Back</a>
+
     </div><!-- /.blog-main -->
 
     <aside class="col-md-4 blog-sidebar">

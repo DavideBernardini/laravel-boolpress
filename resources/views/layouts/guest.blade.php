@@ -40,8 +40,14 @@
                             <line x1="21" y1="21" x2="15.8" y2="15.8"></line>
                         </svg>
                     </a>
-                    <a class="btn btn-sm btn-outline-secondary mx-1" href="{{route("register")}}">Sign up</a>
-                    <a class="btn btn-sm btn-outline-secondary" href="{{route("login")}}">Sign in</a>
+                    @auth
+                        <a href="{{ route('admin.home') }}" class="btn btn-sm btn-outline-secondary">Admin</a>
+                    @else
+                        <a class="btn btn-sm btn-outline-secondary" href="{{route("login")}}">Sign in</a>
+                        @if (Route::has('register'))
+                            <a class="btn btn-sm btn-outline-secondary mx-1" href="{{route("register")}}">Sign up</a>
+                        @endif
+                    @endauth
                 </div>
             </div>
         </header>

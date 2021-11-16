@@ -22,7 +22,7 @@
 						</div>
                         <div class="form-group">
                             <label for="author">Author</label>
-                            <input type="text" class="form-control @error('author') is-invalid @enderror" name="author" id="author" placeholder="Write your name">
+                            <input type="text" class="form-control @error('author') is-invalid @enderror" name="author" id="author" placeholder="Write the author's name">
                             @error('author')
                               <div class="alert alert-danger">{{ $message }}</div>
                             @enderror

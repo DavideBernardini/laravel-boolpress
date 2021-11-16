@@ -9,6 +9,11 @@ use App\Post;
 
 class PostController extends Controller
 {
+    protected $validationRules = [
+        'title' => 'string|required|max:150',
+        'author' => 'string|required',
+        'content' => 'string|required'
+    ];
     /**
      * Display a listing of the resource.
      *
@@ -40,12 +45,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         // validation
-
-        $request->validate([
-            'title' => 'string|required|max:150',
-            'author' => 'string|required',
-            'content' => 'string|required'
-        ]);
+        $request->validate($this->validationRules);
 
         $newPost = new Post();
         $newPost->fill($request->all());
@@ -62,8 +62,8 @@ class PostController extends Controller
             $i++;
         }
         
-
         $newPost->slug = $slug;
+
         $newPost->save();
          
         return redirect()-> route("admin.posts.index")->with("success","Post created");
@@ -98,9 +98,31 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        // validation
+        $request->validate($this->validationRules);
+
+        if( $post->title != $request->title ) {
+            $slug = Str::of($request->title)->slug('-');
+            
+            $postExist = Post::where("slug", $slug)->first();
+
+            $i = 2;
+            
+            while( $postExist ) {
+                $slug = Str::of($request->title)->slug('-') . "-{$i}";
+                $postExist = Post::where("slug", $slug)->first();
+                $i++;
+            }
+            
+            $post->slug = $slug;
+        }
+
+        $post->fill($request->all());
+
+        $post->save();
+        return redirect()->route("admin.posts.index")->with("success","Post {$post->id} was successfully updated");
     }
 
     /**

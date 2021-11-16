@@ -29,7 +29,7 @@
                     <a class="text-muted" href="#">Subscribe</a>
                 </div>
                 <div class="col-4 text-center">
-                    <a class="blog-header-logo text-dark" href="#">Boolpress</a>
+                    <a class="blog-header-logo text-dark" href="/">Boolpress</a>
                 </div>
                 <div class="col-4 d-flex justify-content-end align-items-center">
                     <a class="text-muted" href="#">
@@ -63,10 +63,10 @@
         </div>
         <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
             <div class="col-md-6 px-0">
-                <h1 class="display-4 font-italic">Title of a longer featured blog post</h1>
-                <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and
-                    efficiently about what's most interesting in this post's contents.</p>
-                <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>
+                <h1>{{$post["title"]}}</h1>
+                <p class="blog-post-meta">{{$post->created_at->diffforHumans()}} by <a href="#">{{$post['author']}}</a></p>
+                    <p>{{$post["content"]}}</p>
+                <p class="lead mb-0"><a href="{{route("posts.show", $post["slug"])}}" class="text-white font-weight-bold">Continue reading...</a></p>
             </div>
         </div>
 
@@ -78,8 +78,7 @@
     </div>
 
     <footer class="blog-footer">
-        <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a
-                href="https://twitter.com/mdo">@mdo</a>.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <a href="#">lorem</a></p>
         <p>
             <a href="#">Back to top</a>
         </p>

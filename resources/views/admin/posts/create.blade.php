@@ -12,30 +12,34 @@
                 <div class="card-body">
 
                     <form action="{{route("admin.posts.store")}}" method="POST">
-						@csrf
-						<div class="form-group">
-						  <label for="title">Title</label>
-						  <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title" placeholder="Add a title">
-						  @error('title')
-							<div class="alert alert-danger">{{ $message }}</div>
-						  @enderror
-						</div>
+                        @csrf
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" class="form-control @error('title') is-invalid @enderror" name="title"
+                                id="title" placeholder="Add a title" value="{{old("title")}}">
+                            @error('title')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
                         <div class="form-group">
                             <label for="author">Author</label>
-                            <input type="text" class="form-control @error('author') is-invalid @enderror" name="author" id="author" placeholder="Write the author's name">
+                            <input type="text" class="form-control @error('author') is-invalid @enderror" name="author"
+                                id="author" placeholder="Write the author's name" value="{{old("author")}}">
                             @error('author')
-                              <div class="alert alert-danger">{{ $message }}</div>
+                            <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
-                          </div>
-						<div class="form-group">
-							<label for="content">Content</label>
-							<textarea class="form-control @error('content') is-invalid @enderror" name="content" id="content" cols="30" rows="10" placeholder="Add the content of the new post"></textarea>
-							@error('content')
-								<div class="alert alert-danger">{{ $message }}</div>
-						    @enderror
-						</div>
-						<button type="submit" class="btn btn-success">Create</button>
-					</form>
+                        </div>
+                        <div class="form-group">
+                            <label for="content">Content</label>
+                            <textarea class="form-control @error('content') is-invalid @enderror" name="content"
+                                id="content" cols="30" rows="10"
+                                placeholder="Add the content of the new post">{{old("content")}}</textarea>
+                            @error('content')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <button type="submit" class="btn btn-success">Create</button>
+                    </form>
 
                 </div>
 

@@ -44,8 +44,10 @@
                 text-align: center;
             }
 
-            .title {
+            a.title {
                 font-size: 84px;
+                text-decoration: none;
+                color: #636b6f;
             }
 
             .links > a {
@@ -57,7 +59,11 @@
                 text-decoration: none;
                 text-transform: uppercase;
             }
-
+            h2 {
+                color: #636b6f;
+                font-weight: 500;
+                font-size: 22px;
+            }
             .m-b-md {
                 margin-bottom: 30px;
             }
@@ -68,9 +74,10 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ route('admin.home') }}">Home</a>
+                        <a href="{{ route('admin.home') }}">Admin</a>
                         <a href="{{ route('posts.index') }}">Blog</a>
                     @else
+                        <a href="{{ route('posts.index') }}">Blog</a>
                         <a href="{{ route('login') }}">Login</a>
 
                         @if (Route::has('register'))
@@ -81,20 +88,12 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+                <a href="{{ route('posts.index') }}" class="title m-b-md">
+                    Boolpress
+                </a>
+                <h2>
+                    An alternative to the most famous CMS in the world built with laravel
+                </h2>
             </div>
         </div>
     </body>

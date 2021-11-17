@@ -24,31 +24,26 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Title</th>
-                                <th scope="col">Author</th> 
-                                <th scope="col">Category</th>
+                                <th scope="col">Name</th>
                                 <th scope="col">Slug</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($posts as $post)
+                            @foreach ($categories as $category)
                             <tr>
-                                <td>{{$post["id"]}}</td>
-                                <td>{{$post["title"]}}</td>
-                                <td>{{$post["author"]}}</td>
-                                <td>{{$post["category"]["name"] ?? ""}}</td>
-                                <td>{{$post["slug"]}}</td>
+                                <td>{{$category["id"]}}</td>
+                                <td>{{$category["name"]}}</td>
+                                <td>{{$category["slug"]}}</td>
                                 <td>
-                                    <a href="{{route("admin.posts.show", $post["id"])}}">
+                                    <a href="{{route("admin.categories.show", $category["id"])}}">
                                         <button type="button" class="btn btn-primary">View</button>
                                     </a>
-                                    <br>
-                                    <a href="{{route("admin.posts.edit", $post["id"])}}">
-                                        <button type="button" class="btn btn-warning mt-1">Edit</button>
+                                    <a href="{{route("admin.categories.edit", $category["id"])}}">
+                                        <button type="button" class="btn btn-warning">Edit</button>
                                     </a>
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-danger btn_delete mt-1" data-id="{{$post["id"]}}" data-toggle="modal" data-target="#deleteModal">
+                                    <button type="button" class="btn btn-danger btn_delete" data-id="{{$category["id"]}}" data-toggle="modal" data-target="#deleteModal">
                                         Delete
                                     </button>
                                 </td>
@@ -70,15 +65,15 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Delete post</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Delete category</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                Do you want to delete the post?
+                Do you want to delete the category?
             </div>
-            <form action="{{route("admin.posts.destroy", 'id')}}" method="POST">
+            <form action="{{route("admin.categories.destroy", 'id')}}" method="POST">
                 @csrf
                 @method("DELETE")
                 <input type="hidden" id="delete-id" name="id">

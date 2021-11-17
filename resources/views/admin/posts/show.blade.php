@@ -10,8 +10,8 @@
                     <h1>{{$post["title"]}}</h1>
                     <h5>{{$post["author"]}}</h5>
                     <p>{{$post["content"]}}</p>
+                    <a href="{{route("admin.categories.show", $post["category"]["id"])}}">{{$post["category"]["name"]}}</a>
                 </div>
-                
             </div>
         </div>
     </div>

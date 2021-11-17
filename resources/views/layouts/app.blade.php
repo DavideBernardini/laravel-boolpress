@@ -39,7 +39,11 @@
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a class="nav-link" href="{{route("admin.posts.index")}}">All posts</a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="{{route("admin.posts.create")}}">Add new post</a>
+                        <li class="nav-item"><a class="nav-link" href="{{route("admin.posts.create")}}">Add a new post</a>
+                        </li>
+                        <li class="nav-item ml-4"><a class="nav-link" href="{{route("admin.categories.index")}}">All categories</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="{{route("admin.categories.create")}}">Add a new category</a>
                         </li>
                     </ul>
 

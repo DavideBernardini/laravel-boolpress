@@ -139,6 +139,6 @@ class PostController extends Controller
             $i++;
         }
 
-        return $slug;
+        return $slug; 
     }
 }

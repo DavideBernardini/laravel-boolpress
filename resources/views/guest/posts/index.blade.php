@@ -1,60 +1,70 @@
 @extends('layouts.guest')
 
 @section('pageContent')
-    
-    <div class="row">
-        <div class="col-md-8 blog-main">
 
-            @foreach ($posts as $post)
+<div class="row">
+    <div class="col-md-8 blog-main">
 
-            <div class="blog-post">
-                
-                <h2 class="blog-post-title">
-                    <a href="{{route("posts.show", $post["slug"])}}" style="color: initial; text-decoration: none;">
-                        {{$post['title']}}
-                    </a>
-                </h2>
-                <p class="blog-post-meta">{{$post->created_at->diffforHumans()}} by <a href="#">{{$post['author']}}</a></p>
+        @foreach ($posts as $post)
 
-                <p>{{$post['content']}}</p>
-            </div><!-- /.blog-post -->
+        <div class="blog-post">
 
-            @endforeach
+            <h2 class="blog-post-title">
+                <a href="{{route("posts.show", $post["slug"])}}" style="color: initial; text-decoration: none;">
+                    {{$post['title']}}
+                </a>
+            </h2>
+            <p class="blog-post-meta">{{$post->created_at->diffforHumans()}} by <a href="#">{{$post['author']}}</a></p>
+            @if ($post["category"])
+            <span class="pr-3">
+                <a class="mb-2 h5" href="{{route("categories.show", $post["category"]["slug"])}}">{{$post["category"]["name"]}}</a>
+            </span>
+            @endif
+            @if($post['tags'])
+			<span>
+				@foreach ($post["tags"] as $tag)
+					<span class="badge badge-primary mb-2">{{$tag["name"]}}</span>
+				@endforeach
+			</span>
+		    @endif
+            <p>{{$post['content']}}</p>
+        </div><!-- /.blog-post -->
 
-            <nav class="blog-pagination">
-                <a class="btn btn-outline-primary" href="#">Older</a>
-                <a class="btn btn-outline-secondary disabled" href="#">Newer</a>
-            </nav>
+        @endforeach
 
-        </div><!-- /.blog-main -->
+        <nav class="blog-pagination">
+            <a class="btn btn-outline-primary" href="#">Older</a>
+            <a class="btn btn-outline-secondary disabled" href="#">Newer</a>
+        </nav>
 
-        <aside class="col-md-4 blog-sidebar">
-            <div class="p-3 mb-3 bg-light rounded">
-                <h4 class="font-italic">About</h4>
-                <p class="mb-0">Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur
-                    purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-            </div>
+    </div><!-- /.blog-main -->
 
-            <div class="p-3">
-                <h4 class="font-italic">Archives</h4>
-                <ol class="list-unstyled mb-0">
-                    <li><a href="#">March 2014</a></li>
-                    <li><a href="#">February 2014</a></li>
-                    <li><a href="#">January 2014</a></li>
-                </ol>
-            </div>
+    <aside class="col-md-4 blog-sidebar">
+        <div class="p-3 mb-3 bg-light rounded">
+            <h4 class="font-italic">About</h4>
+            <p class="mb-0">Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur
+                purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+        </div>
 
-            <div class="p-3">
-                <h4 class="font-italic">Elsewhere</h4>
-                <ol class="list-unstyled">
-                    <li><a href="#">GitHub</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">Facebook</a></li>
-                </ol>
-            </div>
-        </aside><!-- /.blog-sidebar -->
+        <div class="p-3">
+            <h4 class="font-italic">Archives</h4>
+            <ol class="list-unstyled mb-0">
+                <li><a href="#">March 2014</a></li>
+                <li><a href="#">February 2014</a></li>
+                <li><a href="#">January 2014</a></li>
+            </ol>
+        </div>
 
-    </div><!-- /.row -->
+        <div class="p-3">
+            <h4 class="font-italic">Elsewhere</h4>
+            <ol class="list-unstyled">
+                <li><a href="#">GitHub</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Facebook</a></li>
+            </ol>
+        </div>
+    </aside><!-- /.blog-sidebar -->
+
+</div><!-- /.row -->
 
 @endsection
-        

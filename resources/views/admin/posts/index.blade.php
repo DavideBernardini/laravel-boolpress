@@ -22,7 +22,7 @@
 
                     <table class="table">
                         <thead>
-                            <tr>
+                            <tr style="border-top: 1px solid #dee2e6">
                                 <th scope="col">#</th>
                                 <th scope="col">Title</th>
                                 <th scope="col">Author</th> 
@@ -38,6 +38,13 @@
                                 <td>{{$post["title"]}}</td>
                                 <td>{{$post["author"]}}</td>
                                 <td>{{$post["category"]["name"] ?? ""}}</td>
+                                <td>
+									@if(count($post["tags"]) > 0)
+										@foreach ($post["tags"] as $tag)
+										<span class="badge badge-primary">{{$tag["name"]}}</span>
+										@endforeach
+									@endif
+								</td>
                                 <td>{{$post["slug"]}}</td>
                                 <td>
                                     <a href="{{route("admin.posts.show", $post["id"])}}">
@@ -47,6 +54,7 @@
                                     <a href="{{route("admin.posts.edit", $post["id"])}}">
                                         <button type="button" class="btn btn-warning mt-1">Edit</button>
                                     </a>
+                                    <br>
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-danger btn_delete mt-1" data-id="{{$post["id"]}}" data-toggle="modal" data-target="#deleteModal">
                                         Delete

@@ -4,25 +4,15 @@
 
 <div class="row">
     <div class="col-md-8 blog-main">
-
-        <h1 class="blog-post-title">
-            {{$post['title']}}
-        </h1>
-        <p class="blog-post-meta">{{$post->created_at->diffforHumans()}} by <a href="#">{{$post['author']}}</a></p>
-        @if ($post["category"])
-        <span class="pr-3">
-            <a class="mb-2 h5" href="{{route("categories.show", $post["category"]["slug"])}}">{{$post["category"]["name"]}}</a>
-        </span>
-        @endif
-        @if($post['tags'])
-        <span>
-            @foreach ($post["tags"] as $tag)
-            <span class="badge badge-primary mb-2">{{$tag["name"]}}</span>
+        <h1 class="blog-post-title">{{$category['name']}}</h1>
+        @if (count($category["posts"]) > 0)
+        <h4 class="pt-3">Others posts with this category:</h4>
+        <ul class="pl-0 pt-3 list-unstyled"> 
+            @foreach ($category["posts"] as $post)
+            <li class="pb-2"><a href="{{route("posts.show", $post["slug"])}}">{{$post["title"]}}</a></li>
             @endforeach
-        </span>
+        </ul>
         @endif
-
-        <p>{{$post['content']}}</p>
 
         <a href="{{ route('posts.index') }}" class="btn btn-sm btn-outline-secondary mt-3">Homepage</a>
 

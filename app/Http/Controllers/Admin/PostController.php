@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Post;
 use App\Category;
+use App\Tag;
 
 class PostController extends Controller
 {
@@ -14,7 +15,8 @@ class PostController extends Controller
         'title' => 'string|required|max:150',
         'author' => 'string|required',
         'content' => 'string|required',
-        'category_id' => 'nullable|exists:categories,id'
+        'category_id' => 'nullable|exists:categories,id',
+        'tags' => 'exists:tags,id'
     ];
     /**
      * Display a listing of the resource.
@@ -36,7 +38,9 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view("admin.posts.create", compact("categories"));
+        $tags = Tag::all();
+
+        return view("admin.posts.create", compact("categories", "tags"));
     }
 
     /**
@@ -47,17 +51,19 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        // validation
+        //validations
         $request->validate($this->validationRules);
 
         $newPost = new Post();
         $newPost->fill($request->all());
-        
+       
         $newPost->slug = $this->getSlug($request->title);
 
         $newPost->save();
-         
-        return redirect()-> route("admin.posts.index")->with("success","Post created");
+
+        $newPost->tags()->attach($request->tags);
+
+        return redirect()->route("admin.posts.index")->with("success","Post created");
     }
 
     /**
@@ -81,7 +87,10 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
-        return view("admin.posts.edit", compact("post","categories"));
+
+        $tags = Tag::all();
+
+        return view("admin.posts.edit", compact("post", "categories", "tags"));
     }
 
     /**
@@ -103,6 +112,9 @@ class PostController extends Controller
         $post->fill($request->all());
 
         $post->save();
+
+        $post->tags()->sync($request->tags);
+
         return redirect()->route("admin.posts.index")->with("success","Post {$post->id} was successfully updated");
     }
 
